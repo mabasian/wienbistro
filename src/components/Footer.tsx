@@ -1,18 +1,23 @@
+'use client'
+
 import { useState } from 'react'
 import { site } from '../content/site'
+import { useLang, type Localized } from '../i18n'
+import { ui } from '../i18n/strings'
 
-const navLinks = [
-  { href: '#ueber-uns', label: 'Über uns' },
-  { href: '#speisekarte', label: 'Speisekarte' },
-  { href: '#reservierung', label: 'Reservierung' },
-  { href: '#oeffnungszeiten', label: 'Öffnungszeiten' },
-  { href: '#standort', label: 'Standort' },
-  { href: '#kontakt', label: 'Kontakt' },
+const navLinks: { href: string; label: Localized }[] = [
+  { href: '#ueber-uns', label: ui.navAbout },
+  { href: '#speisekarte', label: ui.navMenu },
+  { href: '#reservierung', label: ui.navReservation },
+  { href: '#oeffnungszeiten', label: ui.navHours },
+  { href: '#standort', label: ui.navLocation },
+  { href: '#kontakt', label: ui.navContact },
 ]
 
 const year = new Date().getFullYear()
 
 export function Footer() {
+  const { t } = useLang()
   const [legal, setLegal] = useState<null | 'impressum' | 'datenschutz'>(null)
 
   return (
@@ -21,7 +26,7 @@ export function Footer() {
         <div className="grid gap-10 md:grid-cols-3">
           <div>
             <p className="font-serif text-2xl font-bold text-cream">{site.name}</p>
-            <p className="mt-3 max-w-xs text-sm leading-relaxed text-cream/65">{site.claim}</p>
+            <p className="mt-3 max-w-xs text-sm leading-relaxed text-cream/65">{t(site.claim)}</p>
             <p className="mt-4 text-sm text-cream/65">
               {site.address.street}
               <br />
@@ -31,13 +36,13 @@ export function Footer() {
 
           <div>
             <h3 className="text-xs font-semibold uppercase tracking-[0.2em] text-cream/50">
-              Navigation
+              {t(ui.footerNav)}
             </h3>
             <ul className="mt-4 grid grid-cols-2 gap-2 text-sm">
               {navLinks.map((link) => (
                 <li key={link.href}>
                   <a href={link.href} className="text-cream/70 transition-colors hover:text-terracotta-light">
-                    {link.label}
+                    {t(link.label)}
                   </a>
                 </li>
               ))}
@@ -46,7 +51,7 @@ export function Footer() {
 
           <div>
             <h3 className="text-xs font-semibold uppercase tracking-[0.2em] text-cream/50">
-              Kontakt
+              {t(ui.footerContact)}
             </h3>
             <ul className="mt-4 space-y-2 text-sm">
               <li>
@@ -74,10 +79,10 @@ export function Footer() {
         <div className="mt-12 flex flex-col gap-4 border-t border-cream/10 pt-8 text-xs text-cream/55 sm:flex-row sm:items-center sm:justify-between">
           <div className="flex flex-wrap items-center gap-x-5 gap-y-2">
             <button type="button" onClick={() => setLegal('impressum')} className="transition-colors hover:text-cream">
-              Impressum
+              {t(ui.footerImprint)}
             </button>
             <button type="button" onClick={() => setLegal('datenschutz')} className="transition-colors hover:text-cream">
-              Datenschutz
+              {t(ui.footerPrivacy)}
             </button>
             <span>© {year} {site.name}</span>
           </div>
@@ -100,12 +105,12 @@ export function Footer() {
           >
             <div className="flex items-start justify-between gap-4">
               <h2 className="font-serif text-2xl font-semibold">
-                {legal === 'impressum' ? 'Impressum' : 'Datenschutz'}
+                {legal === 'impressum' ? t(ui.footerImprint) : t(ui.footerPrivacy)}
               </h2>
               <button
                 type="button"
                 onClick={() => setLegal(null)}
-                aria-label="Schließen"
+                aria-label={t(ui.footerClose)}
                 className="text-2xl leading-none text-espresso/50 hover:text-espresso"
               >
                 ×
@@ -113,8 +118,7 @@ export function Footer() {
             </div>
             <div className="mt-4 space-y-3 text-sm leading-relaxed text-espresso/75">
               <p className="rounded-lg bg-terracotta/10 p-3 text-terracotta-dark">
-                Platzhalter – im Kundenprojekt durch die rechtlich korrekten Angaben ersetzen
-                (in Österreich gesetzlich verpflichtend).
+                {t(ui.legalPlaceholder)}
               </p>
               {legal === 'impressum' ? (
                 <>
@@ -138,15 +142,8 @@ export function Footer() {
                 </>
               ) : (
                 <>
-                  <p>
-                    Der Schutz deiner persönlichen Daten ist uns ein Anliegen. Diese Website ist
-                    eine Demo; das Reservierungsformular speichert oder übermittelt keine Daten.
-                  </p>
-                  <p>
-                    In der Live-Version werden eingegebene Daten ausschließlich zur Bearbeitung
-                    deiner Reservierung verwendet und nicht an Dritte weitergegeben. Es gelten die
-                    Bestimmungen der DSGVO.
-                  </p>
+                  <p>{t(ui.privacyP1)}</p>
+                  <p>{t(ui.privacyP2)}</p>
                 </>
               )}
             </div>

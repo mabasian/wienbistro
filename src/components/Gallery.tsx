@@ -1,17 +1,19 @@
+'use client'
+
 import { Reveal } from './Reveal'
 import { gallery } from '../content/gallery'
+import { useLang } from '../i18n'
+import { ui } from '../i18n/strings'
 
 export function Gallery() {
+  const { t } = useLang()
   return (
     <section id="galerie" className="bg-cream py-20 md:py-28">
       <div className="container-content">
         <Reveal className="mx-auto max-w-2xl text-center">
-          <span className="eyebrow">Galerie</span>
-          <h2 className="section-title">Ein Blick zu uns herein</h2>
-          <p className="mt-4 text-base leading-relaxed text-espresso/75">
-            Frühstück, Kaffee, Mehlspeisen und die Atmosphäre im Lokal – am besten kommst du
-            einfach selbst vorbei.
-          </p>
+          <span className="eyebrow">{t(ui.galleryEyebrow)}</span>
+          <h2 className="section-title">{t(ui.galleryTitle)}</h2>
+          <p className="mt-4 text-base leading-relaxed text-espresso/75">{t(ui.galleryIntro)}</p>
         </Reveal>
 
         <div className="mt-12 grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-4">
@@ -24,7 +26,7 @@ export function Gallery() {
               <div className="group h-full overflow-hidden rounded-xl">
                 <img
                   src={image.src}
-                  alt={image.alt}
+                  alt={t(image.alt)}
                   loading="lazy"
                   className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                 />

@@ -1,36 +1,38 @@
+'use client'
+
 import { Reveal } from './Reveal'
 import { site } from '../content/site'
+import { useLang } from '../i18n'
+import { ui } from '../i18n/strings'
 import { PhoneIcon, MailIcon, PinIcon, InstagramIcon, FacebookIcon } from './icons'
 
 export function Contact() {
+  const { t } = useLang()
   return (
     <section id="kontakt" className="bg-cream py-20 md:py-28">
       <div className="container-content">
         <Reveal className="mx-auto max-w-2xl text-center">
-          <span className="eyebrow">Kontakt</span>
-          <h2 className="section-title">Schreib oder ruf uns an</h2>
-          <p className="mt-4 text-base leading-relaxed text-espresso/75">
-            Fragen zu einer Reservierung, einer Feier oder einfach so? Wir freuen uns, von dir zu
-            hören.
-          </p>
+          <span className="eyebrow">{t(ui.contactEyebrow)}</span>
+          <h2 className="section-title">{t(ui.contactTitle)}</h2>
+          <p className="mt-4 text-base leading-relaxed text-espresso/75">{t(ui.contactIntro)}</p>
         </Reveal>
 
         <div className="mx-auto mt-12 grid max-w-4xl gap-5 sm:grid-cols-3">
           <ContactCard
             icon={<PhoneIcon className="h-6 w-6" />}
-            title="Telefon"
+            title={t(ui.contactPhone)}
             value={site.contact.phone}
             href={site.contact.phoneHref}
           />
           <ContactCard
             icon={<MailIcon className="h-6 w-6" />}
-            title="E-Mail"
+            title={t(ui.contactEmail)}
             value={site.contact.email}
             href={`mailto:${site.contact.email}`}
           />
           <ContactCard
             icon={<PinIcon className="h-6 w-6" />}
-            title="Adresse"
+            title={t(ui.contactAddress)}
             value={`${site.address.street}, ${site.address.zip} ${site.address.city}`}
             href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(site.mapsQuery)}`}
           />

@@ -1,9 +1,14 @@
+'use client'
+
 import { useEffect, useState } from 'react'
 import { site } from '../content/site'
+import { useLang } from '../i18n'
+import { ui } from '../i18n/strings'
 import { PhoneIcon } from './icons'
 
 /** Persistente Reservierungs-Leiste am unteren Rand – nur mobil, erscheint nach dem Hero. */
 export function StickyReserveBar() {
+  const { t } = useLang()
   const [show, setShow] = useState(false)
 
   useEffect(() => {
@@ -22,13 +27,13 @@ export function StickyReserveBar() {
       <div className="flex items-center gap-3">
         <a
           href={site.contact.phoneHref}
-          aria-label="Anrufen"
+          aria-label={t(ui.callAria)}
           className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-espresso/20 text-espresso"
         >
           <PhoneIcon className="h-5 w-5" />
         </a>
         <a href="#reservierung" className="btn-primary flex-1">
-          Tisch reservieren
+          {t(ui.ctaReserve)}
         </a>
       </div>
     </div>

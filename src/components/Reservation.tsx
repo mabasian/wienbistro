@@ -1,13 +1,22 @@
+'use client'
+
 import { useState, type FormEvent } from 'react'
 import { Reveal } from './Reveal'
 import { site } from '../content/site'
+import { useLang } from '../i18n'
+import { ui } from '../i18n/strings'
 import { PhoneIcon } from './icons'
 
-const guestOptions = ['1 Person', '2 Personen', '3 Personen', '4 Personen', '5 Personen', '6+ Personen']
 const timeOptions = ['08:30', '09:30', '10:30', '11:30', '12:30', '13:30', '14:30', '15:30', '16:30', '17:00']
 
 export function Reservation() {
+  const { t, lang } = useLang()
   const [submitted, setSubmitted] = useState(false)
+
+  const guestOptions =
+    lang === 'de'
+      ? ['1 Person', '2 Personen', '3 Personen', '4 Personen', '5 Personen', '6+ Personen']
+      : ['1 guest', '2 guests', '3 guests', '4 guests', '5 guests', '6+ guests']
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -21,16 +30,12 @@ export function Reservation() {
         <Reveal>
           <div>
             <span className="mb-3 inline-block text-xs font-semibold uppercase tracking-[0.2em] text-cream/80">
-              Reservierung
+              {t(ui.resEyebrow)}
             </span>
             <h2 className="font-serif text-3xl font-semibold leading-tight sm:text-4xl md:text-[2.75rem]">
-              Sichere dir deinen Tisch
+              {t(ui.resTitle)}
             </h2>
-            <p className="mt-5 max-w-md text-base leading-relaxed text-cream/85">
-              Besonders am Wochenende zum Brunch wird es bei uns gern voll. Reserviere am besten
-              vorab – wir freuen uns auf dich. Für größere Gruppen ab 7 Personen oder kurzfristige
-              Anfragen ruf uns einfach an.
-            </p>
+            <p className="mt-5 max-w-md text-base leading-relaxed text-cream/85">{t(ui.resIntro)}</p>
             <a
               href={site.contact.phoneHref}
               className="mt-7 inline-flex items-center gap-3 rounded-full bg-cream/15 px-5 py-3 text-sm font-semibold transition-colors hover:bg-cream/25"
@@ -48,43 +53,42 @@ export function Reservation() {
                 <div className="flex h-16 w-16 items-center justify-center rounded-full bg-olive/15 text-3xl">
                   ✓
                 </div>
-                <h3 className="mt-5 font-serif text-2xl font-semibold">Danke für deine Anfrage!</h3>
+                <h3 className="mt-5 font-serif text-2xl font-semibold">{t(ui.resSuccessTitle)}</h3>
                 <p className="mt-3 max-w-sm text-sm leading-relaxed text-espresso/70">
-                  Dies ist eine Demo-Reservierung ohne tatsächliche Buchung. In der Live-Version
-                  bestätigen wir deinen Tisch per E-Mail innerhalb weniger Stunden.
+                  {t(ui.resSuccessBody)}
                 </p>
                 <button
                   type="button"
                   onClick={() => setSubmitted(false)}
                   className="mt-6 text-sm font-semibold text-terracotta hover:text-terracotta-dark"
                 >
-                  Neue Anfrage stellen
+                  {t(ui.resAgain)}
                 </button>
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-4" noValidate>
                 <div className="grid gap-4 sm:grid-cols-2">
-                  <Field label="Datum" htmlFor="res-date">
+                  <Field label={t(ui.resFieldDate)} htmlFor="res-date">
                     <input id="res-date" name="date" type="date" required className="form-input" />
                   </Field>
-                  <Field label="Uhrzeit" htmlFor="res-time">
+                  <Field label={t(ui.resFieldTime)} htmlFor="res-time">
                     <select id="res-time" name="time" required defaultValue="" className="form-input">
                       <option value="" disabled>
-                        Bitte wählen
+                        {t(ui.resChoose)}
                       </option>
-                      {timeOptions.map((t) => (
-                        <option key={t} value={t}>
-                          {t} Uhr
+                      {timeOptions.map((time) => (
+                        <option key={time} value={time}>
+                          {lang === 'de' ? `${time} Uhr` : time}
                         </option>
                       ))}
                     </select>
                   </Field>
                 </div>
 
-                <Field label="Personen" htmlFor="res-guests">
+                <Field label={t(ui.resFieldGuests)} htmlFor="res-guests">
                   <select id="res-guests" name="guests" required defaultValue="" className="form-input">
                     <option value="" disabled>
-                      Bitte wählen
+                      {t(ui.resChoose)}
                     </option>
                     {guestOptions.map((g) => (
                       <option key={g} value={g}>
@@ -95,18 +99,18 @@ export function Reservation() {
                 </Field>
 
                 <div className="grid gap-4 sm:grid-cols-2">
-                  <Field label="Name" htmlFor="res-name">
+                  <Field label={t(ui.resFieldName)} htmlFor="res-name">
                     <input
                       id="res-name"
                       name="name"
                       type="text"
                       required
                       autoComplete="name"
-                      placeholder="Vor- und Nachname"
+                      placeholder={t(ui.resNamePlaceholder)}
                       className="form-input"
                     />
                   </Field>
-                  <Field label="Telefon" htmlFor="res-phone">
+                  <Field label={t(ui.resFieldPhone)} htmlFor="res-phone">
                     <input
                       id="res-phone"
                       name="phone"
@@ -119,34 +123,32 @@ export function Reservation() {
                   </Field>
                 </div>
 
-                <Field label="E-Mail" htmlFor="res-email">
+                <Field label={t(ui.resFieldEmail)} htmlFor="res-email">
                   <input
                     id="res-email"
                     name="email"
                     type="email"
                     required
                     autoComplete="email"
-                    placeholder="du@beispiel.at"
+                    placeholder={t(ui.resEmailPlaceholder)}
                     className="form-input"
                   />
                 </Field>
 
-                <Field label="Anmerkung (optional)" htmlFor="res-note">
+                <Field label={t(ui.resFieldNote)} htmlFor="res-note">
                   <textarea
                     id="res-note"
                     name="note"
                     rows={2}
-                    placeholder="Kinderstuhl, Allergien, besonderer Anlass …"
+                    placeholder={t(ui.resNotePlaceholder)}
                     className="form-input resize-none"
                   />
                 </Field>
 
                 <button type="submit" className="btn-primary w-full">
-                  Reservierung anfragen
+                  {t(ui.resSubmit)}
                 </button>
-                <p className="text-center text-xs text-espresso/50">
-                  Demo-Formular – es werden keine Daten gespeichert oder gesendet.
-                </p>
+                <p className="text-center text-xs text-espresso/50">{t(ui.resDemoNote)}</p>
               </form>
             )}
           </div>

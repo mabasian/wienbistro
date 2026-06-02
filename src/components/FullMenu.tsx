@@ -1,24 +1,26 @@
+'use client'
+
 import { useState } from 'react'
 import { Reveal } from './Reveal'
 import { menu } from '../content/menu'
+import { useLang } from '../i18n'
+import { ui } from '../i18n/strings'
 
 export function FullMenu() {
+  const { t } = useLang()
   const [active, setActive] = useState(menu[0].id)
 
   return (
-    <section className="bg-espresso py-20 text-cream md:py-28">
+    <section id="karte" className="bg-espresso py-20 text-cream md:py-28">
       <div className="container-content">
         <Reveal className="mx-auto max-w-2xl text-center">
           <span className="mb-3 inline-block text-xs font-semibold uppercase tracking-[0.2em] text-terracotta-light">
-            Speisekarte
+            {t(ui.menuEyebrow)}
           </span>
           <h2 className="font-serif text-3xl font-semibold leading-tight sm:text-4xl md:text-[2.75rem]">
-            Alles auf einen Blick
+            {t(ui.menuTitle)}
           </h2>
-          <p className="mt-4 text-base leading-relaxed text-cream/70">
-            Alle Preise in Euro, inkl. Steuer. Unsere Karte wechselt mit der Saison – Tagesgerichte
-            findest du auf der Tafel im Lokal.
-          </p>
+          <p className="mt-4 text-base leading-relaxed text-cream/70">{t(ui.menuIntro)}</p>
         </Reveal>
 
         {/* Kategorie-Tabs */}
@@ -34,37 +36,40 @@ export function FullMenu() {
                   : 'bg-cream/10 text-cream/80 hover:bg-cream/20'
               }`}
             >
-              {category.title}
+              {t(category.title)}
             </button>
           ))}
         </div>
 
-        {/* Aktive Kategorie */}
+        {/* Alle Kategorien sind im DOM (gut für SEO) – inaktive werden ausgeblendet. */}
         <div className="mx-auto mt-12 max-w-3xl">
-          {menu.map((category) =>
-            category.id === active ? (
-              <div key={category.id} id={`karte-${category.id}`} className="scroll-mt-28">
-                <p className="mb-8 text-center text-sm italic text-cream/60">{category.blurb}</p>
+          {menu.map((category) => (
+              <div
+                key={category.id}
+                id={`karte-${category.id}`}
+                className={`scroll-mt-28 ${category.id === active ? '' : 'hidden'}`}
+              >
+                <p className="mb-8 text-center text-sm italic text-cream/60">{t(category.blurb)}</p>
                 <ul className="divide-y divide-cream/10">
                   {category.items.map((item) => (
-                    <li key={item.name} className="flex gap-4 py-4">
+                    <li key={t(item.name)} className="flex gap-4 py-4">
                       <div className="flex-1">
                         <div className="flex items-baseline gap-2">
                           <h3 className="font-serif text-lg font-semibold text-cream">
-                            {item.name}
+                            {t(item.name)}
                           </h3>
                           {item.tags?.map((tag) => (
                             <span
-                              key={tag}
+                              key={t(tag)}
                               className="rounded-full bg-olive/30 px-2 py-0.5 text-[10px] font-medium uppercase tracking-wide text-cream/80"
                             >
-                              {tag}
+                              {t(tag)}
                             </span>
                           ))}
                         </div>
                         {item.description && (
                           <p className="mt-1 text-sm leading-relaxed text-cream/65">
-                            {item.description}
+                            {t(item.description)}
                           </p>
                         )}
                       </div>
@@ -75,13 +80,12 @@ export function FullMenu() {
                   ))}
                 </ul>
               </div>
-            ) : null,
-          )}
+          ))}
         </div>
 
         <div className="mt-12 text-center">
           <a href="#reservierung" className="btn-primary">
-            Tisch reservieren
+            {t(ui.ctaReserve)}
           </a>
         </div>
       </div>

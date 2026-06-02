@@ -93,12 +93,13 @@ Conversion-Hebel: oberhalb der Falz klare CTAs, Vertrauen durch Testimonials & e
 
 ## 8. Technischer Stack
 
-- **React 18 + TypeScript** (typsicher, wartbar).
-- **Vite** (schneller Build, kleine Bundles).
-- **Tailwind CSS** (konsistentes, schnell anpassbares Design-System).
-- Komponentenbasiert, klare Ordnerstruktur, responsive.
+- **Next.js 14 (App Router) + TypeScript** – serverseitig gerendertes, statisch vorgerendertes HTML für beste SEO.
+- **React 18** (Client-Komponenten für Interaktion: Tabs, Formular, Sprach-/Theme-Wechsel).
+- **Tailwind CSS** mit **CSS-Variablen-Theme-Tokens** (5 Themes ohne Komponenten-Duplikate).
+- **Zweisprachigkeit (DE/EN)** über einen leichten i18n-Context (`Localized {de,en}`), Standard = Deutsch.
+- Komponentenbasiert, klare Ordnerstruktur (`app/`, `src/components`, `src/content`, `src/i18n`), responsive.
 - Keine Backend-Abhängigkeit (Formulare = UI-only, später anbindbar an Resmio/OpenTable/Formspree).
-- Deployment **Vercel**, Domain via Subdomain.
+- Deployment **Vercel** (Auto-Detection Next.js), Domain via Subdomain.
 - Zentrale Inhalts-/Theme-Dateien für einfache Anpassung pro Kunde.
 
 ---

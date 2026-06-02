@@ -1,30 +1,38 @@
+import { l, type Localized } from '../i18n'
+
 export type EventItem = {
-  badge: string
-  title: string
-  description: string
-  when: string
+  badge: Localized
+  title: Localized
+  description: Localized
+  when: Localized
 }
 
 export const events: EventItem[] = [
   {
-    badge: 'Jedes Wochenende',
-    title: 'Großer Wochenend-Brunch',
-    description:
+    badge: l('Jedes Wochenende', 'Every weekend'),
+    title: l('Großer Wochenend-Brunch', 'Grand Weekend Brunch'),
+    description: l(
       'Samstag & Sonntag von 9 bis 16 Uhr: unser ganztägiges Brunch-Angebot mit frischem Gebäck, Bio-Eiern und Mehlspeisen aus der Vitrine. Reservierung empfohlen.',
-    when: 'Sa & So · 09:00–16:00',
+      'Saturday & Sunday, 9 am to 4 pm: our all-day brunch with fresh pastries, organic eggs and treats from the display case. Reservation recommended.',
+    ),
+    when: l('Sa & So · 09:00–16:00', 'Sat & Sun · 09:00–16:00'),
   },
   {
-    badge: 'Saison-Special',
-    title: 'Marillen-Wochen',
-    description:
+    badge: l('Saison-Special', 'Seasonal special'),
+    title: l('Marillen-Wochen', 'Apricot Weeks'),
+    description: l(
       'Solange die Wachauer Marillen reif sind: Marillenknödel, Marillen-French-Toast und hausgemachte Marillenlimonade.',
-    when: 'Juli & August',
+      'While the Wachau apricots are ripe: apricot dumplings, apricot French toast and homemade apricot lemonade.',
+    ),
+    when: l('Juli & August', 'July & August'),
   },
   {
-    badge: 'Jeden ersten Donnerstag',
-    title: 'Filterkaffee-Verkostung',
-    description:
+    badge: l('Jeden ersten Donnerstag', 'First Thursday of the month'),
+    title: l('Filterkaffee-Verkostung', 'Filter Coffee Tasting'),
+    description: l(
       'Wir öffnen drei Single Origins und brühen gemeinsam auf. Mit unserer Wiener Partnerrösterei. Begrenzte Plätze.',
-    when: '1. Donnerstag · 17:30',
+      'We open three single origins and brew together with our Viennese partner roastery. Limited seats.',
+    ),
+    when: l('1. Donnerstag · 17:30', '1st Thursday · 17:30'),
   },
 ]

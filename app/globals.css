@@ -1,0 +1,157 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+ * ─── DESIGN-TOKENS / THEMES ────────────────────────────────────────────────
+ * Farben als RGB-Kanäle (space-separated), damit Tailwind-Opacity (z. B. bg-espresso/70)
+ * funktioniert. Theme-Wechsel via [data-theme="…"] auf <html>. Siehe ThemeSwitcher.
+ * Rollen: --color-espresso = primäre Dunkelfarbe · --color-cream = heller Hintergrund
+ *         --color-terracotta = Akzent · --color-olive = Sekundärakzent · --color-sand = Neutral
+ */
+@layer base {
+  /* 1 · Vienna Cream – warm, klassisch-wienerisch (Default) */
+  :root,
+  [data-theme='vienna-cream'] {
+    --color-espresso: 46 32 24;
+    --color-espresso-light: 74 55 43;
+    --color-espresso-dark: 28 19 13;
+    --color-cream: 250 244 236;
+    --color-cream-dark: 241 231 216;
+    --color-terracotta: 200 97 47;
+    --color-terracotta-dark: 169 77 34;
+    --color-terracotta-light: 224 138 85;
+    --color-olive: 107 114 68;
+    --color-sand: 231 215 193;
+    --grad-hero: linear-gradient(135deg, rgb(28 19 13 / 0.92) 0%, rgb(46 32 24 / 0.55) 55%, rgb(200 97 47 / 0.25) 100%);
+  }
+
+  /* 2 · Espresso Gold – tiefes Braun mit warmem Goldakzent, luxuriös */
+  [data-theme='espresso-gold'] {
+    --color-espresso: 38 28 21;
+    --color-espresso-light: 64 48 36;
+    --color-espresso-dark: 24 17 12;
+    --color-cream: 247 241 230;
+    --color-cream-dark: 238 229 213;
+    --color-terracotta: 190 150 70;
+    --color-terracotta-dark: 158 122 48;
+    --color-terracotta-light: 214 180 110;
+    --color-olive: 122 110 74;
+    --color-sand: 226 213 188;
+    --grad-hero: linear-gradient(135deg, rgb(24 17 12 / 0.92) 0%, rgb(38 28 21 / 0.55) 55%, rgb(190 150 70 / 0.28) 100%);
+  }
+
+  /* 3 · Imperial Burgundy – tiefes Weinrot, elegant & imperial */
+  [data-theme='imperial-burgundy'] {
+    --color-espresso: 58 26 33;
+    --color-espresso-light: 86 42 51;
+    --color-espresso-dark: 40 16 22;
+    --color-cream: 248 242 238;
+    --color-cream-dark: 240 229 223;
+    --color-terracotta: 150 42 58;
+    --color-terracotta-dark: 120 32 46;
+    --color-terracotta-light: 184 78 94;
+    --color-olive: 150 120 70;
+    --color-sand: 228 210 204;
+    --grad-hero: linear-gradient(135deg, rgb(40 16 22 / 0.92) 0%, rgb(58 26 33 / 0.55) 55%, rgb(150 42 58 / 0.3) 100%);
+  }
+
+  /* 4 · Sage Brunch – sanftes Salbeigrün mit warmem Lehm-Akzent, frisch & modern */
+  [data-theme='sage-brunch'] {
+    --color-espresso: 38 46 40;
+    --color-espresso-light: 58 70 60;
+    --color-espresso-dark: 26 33 28;
+    --color-cream: 244 246 239;
+    --color-cream-dark: 232 236 223;
+    --color-terracotta: 196 130 96;
+    --color-terracotta-dark: 166 104 74;
+    --color-terracotta-light: 216 158 128;
+    --color-olive: 122 146 116;
+    --color-sand: 222 228 210;
+    --grad-hero: linear-gradient(135deg, rgb(26 33 28 / 0.92) 0%, rgb(38 46 40 / 0.55) 55%, rgb(196 130 96 / 0.28) 100%);
+  }
+
+  /* 5 · Midnight Bistro – Mitternachtsblau mit warmem Messing-Akzent, abendlich & edel */
+  [data-theme='midnight-bistro'] {
+    --color-espresso: 26 32 46;
+    --color-espresso-light: 44 52 70;
+    --color-espresso-dark: 17 21 31;
+    --color-cream: 244 245 248;
+    --color-cream-dark: 230 232 238;
+    --color-terracotta: 201 146 70;
+    --color-terracotta-dark: 168 118 52;
+    --color-terracotta-light: 220 172 110;
+    --color-olive: 90 120 120;
+    --color-sand: 214 218 226;
+    --grad-hero: linear-gradient(135deg, rgb(17 21 31 / 0.93) 0%, rgb(26 32 46 / 0.58) 55%, rgb(201 146 70 / 0.26) 100%);
+  }
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
+  }
+
+  body {
+    @apply bg-cream text-espresso font-sans antialiased;
+  }
+
+  /* Sanfter Übergang der großen Hintergrundflächen beim Theme-Wechsel.
+     Bewusst nur auf Layout-Container (kein .transition-* Utility nötig), damit
+     Hover-/Transform-Animationen der Komponenten unberührt bleiben. */
+  @media (prefers-reduced-motion: no-preference) {
+    body,
+    section,
+    header,
+    footer {
+      transition: background-color 300ms ease, color 300ms ease;
+    }
+  }
+
+  h1,
+  h2,
+  h3 {
+    @apply font-serif;
+  }
+}
+
+@layer components {
+  .container-content {
+    @apply mx-auto w-full max-w-content px-5 sm:px-8;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center rounded-full bg-terracotta px-7 py-3.5 text-sm font-semibold uppercase tracking-wide text-cream shadow-sm transition-colors duration-200 hover:bg-terracotta-dark focus:outline-none focus-visible:ring-2 focus-visible:ring-terracotta focus-visible:ring-offset-2 focus-visible:ring-offset-cream;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center rounded-full border border-espresso/30 bg-transparent px-7 py-3.5 text-sm font-semibold uppercase tracking-wide text-espresso transition-colors duration-200 hover:border-espresso hover:bg-espresso hover:text-cream focus:outline-none focus-visible:ring-2 focus-visible:ring-espresso focus-visible:ring-offset-2 focus-visible:ring-offset-cream;
+  }
+
+  .form-input {
+    @apply w-full rounded-lg border border-espresso/20 bg-cream/40 px-4 py-2.5 text-sm text-espresso placeholder:text-espresso/40 transition-colors focus:border-terracotta focus:bg-white focus:outline-none focus:ring-2 focus:ring-terracotta/30;
+  }
+
+  .eyebrow {
+    @apply mb-3 inline-block text-xs font-semibold uppercase tracking-[0.2em] text-terracotta;
+  }
+
+  .section-title {
+    @apply font-serif text-3xl font-semibold leading-tight text-espresso sm:text-4xl md:text-[2.75rem];
+  }
+}
+
+/* Respect reduced-motion preferences. */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}

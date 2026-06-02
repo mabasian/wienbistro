@@ -1,26 +1,30 @@
 /** @type {import('tailwindcss').Config} */
-export default {
-  content: ['./index.html', './src/**/*.{ts,tsx}'],
+module.exports = {
+  content: ['./app/**/*.{ts,tsx}', './src/**/*.{ts,tsx}'],
   theme: {
     extend: {
       colors: {
-        // Re-skin these tokens per client.
+        // Semantische Design-Tokens, gespeist aus CSS-Variablen (siehe src/index.css).
+        // Dadurch sind Live-Theme-Wechsel möglich, ohne Komponenten zu duplizieren.
+        // espresso = primäre Dunkelfarbe (Text & dunkle Sektionen)
+        // cream    = helle Hintergrundfarbe
+        // terracotta = Akzentfarbe · olive = Sekundärakzent · sand = warmes Neutral
         espresso: {
-          DEFAULT: '#2E2018',
-          light: '#4A372B',
-          dark: '#1C130D',
+          DEFAULT: 'rgb(var(--color-espresso) / <alpha-value>)',
+          light: 'rgb(var(--color-espresso-light) / <alpha-value>)',
+          dark: 'rgb(var(--color-espresso-dark) / <alpha-value>)',
         },
         cream: {
-          DEFAULT: '#FAF4EC',
-          dark: '#F1E7D8',
+          DEFAULT: 'rgb(var(--color-cream) / <alpha-value>)',
+          dark: 'rgb(var(--color-cream-dark) / <alpha-value>)',
         },
         terracotta: {
-          DEFAULT: '#C8612F',
-          dark: '#A94D22',
-          light: '#E08A55',
+          DEFAULT: 'rgb(var(--color-terracotta) / <alpha-value>)',
+          dark: 'rgb(var(--color-terracotta-dark) / <alpha-value>)',
+          light: 'rgb(var(--color-terracotta-light) / <alpha-value>)',
         },
-        olive: '#6B7244',
-        sand: '#E7D7C1',
+        olive: 'rgb(var(--color-olive) / <alpha-value>)',
+        sand: 'rgb(var(--color-sand) / <alpha-value>)',
       },
       fontFamily: {
         serif: ['Fraunces', 'Georgia', 'serif'],
