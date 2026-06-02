@@ -44,7 +44,7 @@ const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'CafeOrCoffeeShop',
   name: 'WienBistro',
-  image: `${siteUrl}/og-image.jpg`,
+  image: `${siteUrl}/opengraph-image`,
   '@id': siteUrl,
   url: siteUrl,
   telephone: '+43 1 234 56 78',
