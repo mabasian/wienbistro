@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#2E2018" />
+
+    <title>WienBistro – Frühstück, Brunch & Specialty Coffee in Wien-Neubau</title>
+    <meta
+      name="description"
+      content="WienBistro im 7. Bezirk: ganztägiges Frühstück & Brunch, hausgemachte Mehlspeisen, Specialty Coffee und ein wechselnder Mittagsteller. Tisch online reservieren."
+    />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://wienbistro.mabasian.dev/" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="restaurant" />
+    <meta property="og:locale" content="de_AT" />
+    <meta property="og:site_name" content="WienBistro" />
+    <meta property="og:title" content="WienBistro – Wiener Frühstückskultur, neu aufgebrüht" />
+    <meta
+      property="og:description"
+      content="Frühstück, Brunch & Specialty Coffee im 7. Bezirk. Tisch online reservieren."
+    />
+    <meta property="og:url" content="https://wienbistro.mabasian.dev/" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Schema.org structured data for local SEO -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "CafeOrCoffeeShop",
+        "name": "WienBistro",
+        "image": "https://wienbistro.mabasian.dev/og-image.jpg",
+        "@id": "https://wienbistro.mabasian.dev",
+        "url": "https://wienbistro.mabasian.dev",
+        "telephone": "+43 1 234 56 78",
+        "priceRange": "€€",
+        "servesCuisine": ["Frühstück", "Brunch", "Kaffee", "Bistro"],
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Lindengasse 24",
+          "addressLocality": "Wien",
+          "postalCode": "1070",
+          "addressCountry": "AT"
+        },
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": 48.2003,
+          "longitude": 16.3505
+        },
+        "openingHoursSpecification": [
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+            "opens": "08:00",
+            "closes": "18:00"
+          },
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Saturday", "Sunday"],
+            "opens": "09:00",
+            "closes": "16:00"
+          }
+        ]
+      }
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
