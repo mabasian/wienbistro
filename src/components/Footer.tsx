@@ -87,7 +87,15 @@ export function Footer() {
             <span>© {year} {site.name}</span>
           </div>
           <p className="text-cream/45">
-            Website-Demo für Gastronomie in Wien by Mabasian (Reza)
+            Website-Demo für Gastronomie in Wien by{' '}
+            <a
+              href="https://mabasian.dev"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-medium text-cream/70 underline-offset-2 transition-colors hover:text-terracotta-light hover:underline"
+            >
+              Mabasian (Reza)
+            </a>
           </p>
         </div>
       </div>
